@@ -1,0 +1,46 @@
+<!--
+	Module:			DecodeSTL.html
+    
+    Description:	decode STL 3D file
+    
+	Reference:
+    	BMP.js		http://devongovett.github.com/bmp.js/
+        
+    Author(s):		devongovett provide a bmp decoding example.
+    				C.T. Yeung modify to decode STL.
+    
+    History:		
+    20Dec11			1st crack at it							cty
+-->
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>STL decoder</title>
+
+	<LINK REL=StyleSheet HREF="default.css" TYPE="text/css"> 
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="STL.js"></script>
+    <script>
+		$(document).ready(function() {
+			var canvas = document.getElementById("myCanvas");
+			var context = canvas.getContext("2d");
+				
+			function render(stl) {
+				canvas.width = 400;
+				canvas.height = 400;
+				stl.drawWireFrame(context, canvas.width, canvas.height);
+				context.closePath();
+			}
+			
+			STL.load('http://localhost/DecodeSTL/test.stl', render);
+		});
+    </script>
+
+<body>
+
+
+<canvas id="myCanvas" width="400" height="400">
+    HTML5 canvas failed to load.
+</canvas>
+</body>
+</html>

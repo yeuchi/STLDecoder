@@ -1,0 +1,9 @@
+@charset "utf-8";
+/* CSS Document */
+
+canvas {
+        border: 1px dashed red;
+        /*background-color: #DDD;
+        border-radius: 30px;
+        opacity: 1;*/
+    }
