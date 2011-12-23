@@ -1,19 +1,24 @@
+<!DOCTYPPE html>
+<html lang="en">
 <!--
 	Module:			DecodeSTL.html
     
     Description:	decode STL 3D file
+    				extending work of Devon Govett from bmp.js
     
 	Reference:
     	BMP.js		http://devongovett.github.com/bmp.js/
         
-    Author(s):		devongovett provide a bmp decoding example.
+    Author(s):		Devon Govett provide a bmp decoding example.
     				C.T. Yeung modify to decode STL.
     
     History:		
-    20Dec11			1st crack at it							cty
+    20Dec11			1st crack at it								cty
+    23Dec11			loading vertexies OK
+    				need to test normal when rendering shades
+                    rotation is off when passed 180 degrees		cty
 -->
-<!DOCTYPE html>
-<html>
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>STL decoder</title>
 
@@ -24,23 +29,108 @@
 		$(document).ready(function() {
 			var canvas = document.getElementById("myCanvas");
 			var context = canvas.getContext("2d");
+			var rX = 0;
+			var rY = 180;
+			var rZ = 90.0;
+			var STEP = 10;
+			var instance;
+			
+			$("#btnClear").click(function() {
+				context.clearRect(0,0,canvas.width, canvas.height);
+			});
+			
+			$("#btnLoad").click(function() {
+				loadSTL();
+			});
+			
+			$("#slider").change(function() {
+				if(null!=instance)
+					update();
+			});
+			
+			// rotation controls
+			$("#imgLeft").click(function() {
+				rZ -= STEP;
+				if(rZ<0)
+					rZ = 360+rZ;
 				
-			function render(stl) {
-				canvas.width = 400;
-				canvas.height = 400;
-				stl.drawWireFrame(context, canvas.width, canvas.height);
-				context.closePath();
+				$("#zpos").html("Rotate Z: "+rZ);
+				if(null==instance)
+					loadSTL();
+				else
+					update();
+			});
+			
+			$("#imgRight").click(function() {
+				rZ += STEP;
+				if(rZ>360)
+					rZ -= 360;
+				
+				$("#zpos").html("Rotate Z: "+rZ);
+				if(null==instance)
+					loadSTL();
+				else
+					update();
+			});
+			
+			function loadSTL() {
+				//STL.load('http://localhost/DecodeSTL/monkey_vtn.stl', render);
+				STL.load('http://www.ctyeung.com/JQuery/DecodeSTL/asset/monkey_vtn.stl', render);
 			}
 			
-			STL.load('http://localhost/DecodeSTL/test.stl', render);
+			function render(stl) {
+				instance = stl;
+				update();
+			}
+			
+			function update() {	
+				var mag = $("#slider").val();
+				context.clearRect(0,0,canvas.width, canvas.height);
+				context = canvas.getContext('2d');
+				context.strokeStyle = 'black';
+				instance.drawWireFrame(context, canvas.width, canvas.height, mag,rX, rY, rZ);
+			}
 		});
     </script>
+</head>
 
-<body>
-
+<body style="position:relative">
 
 <canvas id="myCanvas" width="400" height="400">
     HTML5 canvas failed to load.
 </canvas>
+
+<div id="divLeft">
+	<img id="imgLeft" class="img" src="asset/arrowLeft.png"
+    onMouseOver="src='asset/arrowLeftOver.png'"
+    onMouseOut="src='asset/arrowLeft.png'"/>
+</div>
+
+<div id="divRight">
+	<img id="imgRight" class="img" src="asset/arrowRight.png"
+    onMouseOver="src='asset/arrowRightOver.png'"
+    onMouseOut="src='asset/arrowRight.png'"/>
+</div>
+
+<div id="divControls">
+    <p> Javascript-STL loader<br>
+    <br>
+    Reference: <br>
+    (1)3D Computer Graphics - 3rd Edition by Alan Watt, pg. 5<br>
+    (2)<a href="http://en.wikipedia.org/wiki/STL_(file_format)">STL specification</a><br>
+    (3)<a href="http://devongovett.github.com/bmp.js/">Devon Govett's bmp.js</a><br>
+    <br>
+    Controls:<br>
+    (1) Magnification (slider range: 0 - 200 in Chrome).<br>
+    (2) Click on an arrow to rotate 10 degrees increment.<br><br>
+    </p>
+    <p id="zpos"> Rotate Z: </p>
+    
+	Magnification: <input id="slider" type="range" value=100  min="1" max="200" step="10" /><br>
+    <br>
+	<input type="submit" id="btnLoad" size="20" value="Load"/>
+	<input type="submit" id="btnClear" size="20" value="Clear"/>
+</div>
+
 </body>
 </html>
