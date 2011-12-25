@@ -18,6 +18,7 @@
     23Dec11			loading vertexies OK
     				need to test normal when rendering shades
                     rotation is off when passed 180 degrees		cty
+    24Dec11			add a few more models
 -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -36,13 +37,7 @@
 			var STEP = 10;
 			var instance;
 			
-			$("#btnClear").click(function() {
-				context.clearRect(0,0,canvas.width, canvas.height);
-			});
-			
-			$("#btnLoad").click(function() {
-				loadSTL();
-			});
+			loadSTL();
 			
 			$("#slider").change(function() {
 				if(null!=instance)
@@ -74,9 +69,13 @@
 					update();
 			});
 			
+			$("#combo").change(function() {
+				loadSTL();
+			});
+			
 			function loadSTL() {
-				//STL.load('http://localhost/DecodeSTL/monkey_vtn.stl', render);
-				STL.load('http://www.ctyeung.com/JQuery/DecodeSTL/asset/monkey_vtn.stl', render);
+				var url = "asset/" + $("#combo").val();
+				STL.load(url, render);
 			}
 			
 			function render(stl) {
@@ -120,18 +119,22 @@
     (1)3D Computer Graphics - 3rd Edition by Alan Watt, pg. 5<br>
     (2)<a href="http://en.wikipedia.org/wiki/STL_(file_format)">STL specification</a><br>
     (3)<a href="http://devongovett.github.com/bmp.js/">Devon Govett's bmp.js</a><br>
-    (4)<a href="http://www.thingiverse.com/thing:9656">monkey STL model</a><br>
+    (4)<a href="http://www.thingiverse.com/thing:9656">sample models</a><br>
     <br>
     Controls:<br>
     (1) Magnification (slider range: 0 - 200 in Chrome).<br>
     (2) Click on an arrow to rotate 10 degrees increment.<br><br>
     </p>
+    <select id="combo">
+      <option value="monkey_vtn.stl">monkey</option>
+      <option value="torus_vtn.stl">torus</option>
+      <option value="cylinder_vtn_200v.stl">cylinder</option>
+      <option value="cone_vtn_100v.stl">cone</option>
+	</select> 
     <p id="zpos"> Rotate Z: </p>
     
 	Magnification: <input id="slider" type="range" value=100  min="1" max="200" step="10" /><br>
     <br>
-	<input type="submit" id="btnLoad" size="20" value="Load"/>
-	<input type="submit" id="btnClear" size="20" value="Clear"/>
 </div>
 
 </body>

@@ -6,6 +6,7 @@ canvas {
         border: 1px dashed red;
 		position:relative;
 		left: 50;
+		top: 20;
         /*background-color: #DDD;
         border-radius: 30px;
         opacity: 1;*/
@@ -28,7 +29,7 @@ button {
 }
 
 #divControls {
-	top:-460; 
+	top:-480; 
 	left:470; 
     position:relative;
 }
