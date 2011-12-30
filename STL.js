@@ -219,19 +219,21 @@
 			var y = vtx[index*3+1];
 			var z = vtx[index*3+2];
 			
+			var dx, dy, dz;
+			
 			// rotate X
-			var dy = Math.cos(radY)*y-Math.sin(radZ)*z;
-			var dz = Math.sin(radY)*y+Math.cos(radZ)*z;
+			dy = Math.cos(radX)*y-Math.sin(radX)*z;
+			dz = Math.sin(radX)*y+Math.cos(radX)*z;
 			
 			// rotate Y
 			z = dz;
-			var dx = Math.cos(radX)*x+Math.sin(radZ)*z;
-				dz = -Math.sin(radX)*x+Math.cos(radZ)*z;
+			dx = Math.cos(radY)*x+Math.sin(radY)*z;
+			dz = -Math.sin(radY)*x+Math.cos(radY)*z;
 			
 			// rotate Z
 			y = dy;
-			var dx = Math.cos(radX)*x-Math.sin(radY)*y;
-				dy = Math.sin(radY)*x+Math.cos(radY)*y;
+			dx = Math.cos(radZ)*x-Math.sin(radZ)*y;
+			dy = Math.sin(radZ)*x+Math.cos(radZ)*y;
 				
 			// assign values
 			vtx[index*3] = dx * mag;

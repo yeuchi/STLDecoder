@@ -31,9 +31,9 @@
 		$(document).ready(function() {
 			var canvas = document.getElementById("myCanvas");
 			var context = canvas.getContext("2d");
-			var rX = 0;
-			var rY = 180;
-			var rZ = 90.0;
+			var rX = 270;
+			var rY = 0;
+			var rZ = 0;
 			var STEP = 10;
 			var instance;
 			
@@ -46,11 +46,11 @@
 			
 			// rotation controls
 			$("#imgLeft").click(function() {
-				rZ -= STEP;
-				if(rZ<0)
-					rZ = 360+rZ;
+				rX -= STEP;
+				if(rX<0)
+					rX = 360+rX;
 				
-				$("#zpos").html("Rotate Z: "+rZ);
+				$("#xpos").html("Rotate X: "+rX);
 				if(null==instance)
 					loadSTL();
 				else
@@ -58,11 +58,11 @@
 			});
 			
 			$("#imgRight").click(function() {
-				rZ += STEP;
-				if(rZ>360)
-					rZ -= 360;
+				rX += STEP;
+				if(rX>360)
+					rX -= 360;
 				
-				$("#zpos").html("Rotate Z: "+rZ);
+				$("#xpos").html("Rotate X: "+rX);
 				if(null==instance)
 					loadSTL();
 				else
@@ -131,7 +131,7 @@
       <option value="cylinder_vtn_200v.stl">cylinder</option>
       <option value="cone_vtn_100v.stl">cone</option>
 	</select> 
-    <p id="zpos"> Rotate Z: </p>
+    <p id="xpos"> Rotate X: </p>
     
 	Magnification: <input id="slider" type="range" value=100  min="1" max="200" step="10" /><br>
     <br>
