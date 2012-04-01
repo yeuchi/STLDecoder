@@ -1,4 +1,4 @@
-<!DOCTYPPE html>
+<!DOCTYPE html>
 <html lang="en">
 <!--
 	Module:			DecodeSTL.html
@@ -46,11 +46,12 @@
 			
 			// rotation controls
 			$("#imgLeft").click(function() {
-				rX -= STEP;
-				if(rX<0)
-					rX = 360+rX;
+			
+				rY -= STEP;
+				if(rY<0)
+					rY = 360+rY;
 				
-				$("#xpos").html("Rotate X: "+rX);
+				$("#ypos").html("Rotate Y: "+rY);
 				if(null==instance)
 					loadSTL();
 				else
@@ -58,11 +59,12 @@
 			});
 			
 			$("#imgRight").click(function() {
-				rX += STEP;
-				if(rX>360)
-					rX -= 360;
 				
-				$("#xpos").html("Rotate X: "+rX);
+				rY += STEP;
+				if(rY>360)
+					rY -= 360;
+				
+				$("#ypos").html("Rotate Y: "+rY);
 				if(null==instance)
 					loadSTL();
 				else
@@ -90,15 +92,29 @@
 				context.strokeStyle = 'black';
 				instance.drawWireFrame(context, canvas.width, canvas.height, mag,rX, rY, rZ);
 			}
+			
+			setInterval(function() {
+				    rX += 2;
+				    if(rX>360)
+					    rX -= 360;
+				    
+				    $("#xpos").html("Rotate X: "+rX);
+				    if(null==instance)
+					    loadSTL();
+				    else
+					    update();
+				
+			}, 100);
 		});
     </script>
 </head>
 
 <body style="position:relative">
-
-<canvas id="myCanvas" width="400" height="400">
-    HTML5 canvas failed to load.
-</canvas>
+<div id="divCanvas">
+    <canvas id="myCanvas" width="400" height="400">
+        HTML5 canvas failed to load.
+    </canvas>
+</div>
 
 <div id="divLeft">
 	<img id="imgLeft" class="img" src="asset/arrowLeft.png"
@@ -132,6 +148,7 @@
       <option value="cone_vtn_100v.stl">cone</option>
 	</select> 
     <p id="xpos"> Rotate X: </p>
+    <p id="ypos"> Rotate Y: </p>
     
 	Magnification: <input id="slider" type="range" value=100  min="1" max="200" step="10" /><br>
     <br>
