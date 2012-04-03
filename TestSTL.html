@@ -78,6 +78,7 @@
 			function loadSTL() {
 				var url = "asset/" + $("#combo").val();
 				STL.load(url, render);
+				
 			}
 			
 			function render(stl) {
@@ -90,6 +91,7 @@
 				context.clearRect(0,0,canvas.width, canvas.height);
 				context = canvas.getContext('2d');
 				context.strokeStyle = 'black';
+				instance.decode();
 				instance.drawWireFrame(context, canvas.width, canvas.height, mag,rX, rY, rZ);
 			}
 			
@@ -133,9 +135,10 @@
     <br>
     Reference: <br>
     (1)3D Computer Graphics - 3rd Edition by Alan Watt, pg. 5<br>
-    (2)<a href="http://en.wikipedia.org/wiki/STL_(file_format)">STL specification</a><br>
-    (3)<a href="http://devongovett.github.com/bmp.js/">Devon Govett's bmp.js</a><br>
-    (4)<a href="http://www.thingiverse.com/thing:9656">sample models</a><br>
+    (2)<a href="http://en.wikipedia.org/wiki/STL_(file_format)">STL (binary)specification</a><br>
+    (3)<a href="http://en.wikipedia.org/wiki/STL_%28file_format%29#ASCII_STL">STL (ascii)specification</a><br/>
+    (4)<a href="http://devongovett.github.com/bmp.js/">Devon Govett's bmp.js</a><br>
+    (5)<a href="http://www.thingiverse.com/thing:9656">sample models</a><br>
     <br>
     Controls:<br>
     (1) Magnification (slider range: 0 - 200 in Chrome).<br>
@@ -146,6 +149,8 @@
       <option value="torus_vtn.stl">torus</option>
       <option value="cylinder_vtn_200v.stl">cylinder</option>
       <option value="cone_vtn_100v.stl">cone</option>
+      <option value="monkey_ascii.stl">monkey(ascii)</option>
+      <option value="torus_ascii.stl">torus(ascii)</option>
 	</select> 
     <p id="xpos"> Rotate X: </p>
     <p id="ypos"> Rotate Y: </p>
