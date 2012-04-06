@@ -214,9 +214,9 @@
 		  if(this.dataType.length)
 		    return this.dataType;
 		  
+		  var str = this.bin2String(0, 10).toLocaleLowerCase();
+		  var endPos = 0;
 		  var sttPos = 0;
-		  var endPos = this.findEndPos(0);		// return EOF pos if not found
-		  var str = this.bin2String(sttPos, endPos).toLocaleLowerCase();
 		  
 		  if(str.indexOf(this.ASCII_TITLE)>=0) {
 		    this.dataType = this.TYPE_ASCII;
