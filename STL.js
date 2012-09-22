@@ -410,6 +410,10 @@
         return STL;
     })();
 
-    window.STL = STL;
+    if (typeof window === 'undefined') {
+        module.exports = STL;
+    } else {
+        window.STL = STL;
+    }
 }).call(this);
 // JavaScript Document
