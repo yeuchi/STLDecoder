@@ -1,0 +1,15 @@
+{
+    "name": "STLDecoder",
+    "description": "3D format: STL file decoder for javascript",
+    "keywords": ["STL", "3d printing", "3d"],
+    "url": "http://www.ctyeung.com/JQuery/DecodeSTL/TestSTL.html",
+    "version": "0.0.1",
+    "main": "STL.js",
+    "author": "CT Yeung",
+    "contributors": [],
+    "dependencies": [],
+    "repository" : {
+        "type": "git",
+        "url": "git://github.com/yeuchi/STLDecoder.git"
+    }
+}
