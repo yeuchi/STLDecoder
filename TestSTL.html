@@ -95,68 +95,81 @@
 				instance.drawWireFrame(context, canvas.width, canvas.height, mag,rX, rY, rZ);
 			}
 			
-			setInterval(function() {
+			function getRequestAnimation() {
+				    var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+							        window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+				    window.requestAnimationFrame = requestAnimationFrame;
+			}
+			getRequestAnimation();
+			
+			function step() {
 				    rX += 2;
 				    if(rX>360)
 					    rX -= 360;
 				    
 				    $("#xpos").html("Rotate X: "+rX);
+				    
 				    if(null==instance)
 					    loadSTL();
 				    else
 					    update();
-				
-			}, 100);
+				      
+				    requestAnimationFrame(step);
+			}
+			requestAnimationFrame(step);
 		});
     </script>
 </head>
 
-<body style="position:relative">
-<div id="divCanvas">
-    <canvas id="myCanvas" width="400" height="400">
-        HTML5 canvas failed to load.
-    </canvas>
-</div>
+<body style="position:absolute">
+	    <div>
+			<div id="divCanvas">
+			    <canvas id="myCanvas" width="400" height="400">
+				HTML5 canvas failed to load.
+			    </canvas>
+			</div>
+			
+			<div id="divControls">
+				    <p> Javascript-STL loader<br>
+				    <br>
+				    Reference: <br>
+				    (1)3D Computer Graphics - 3rd Edition by Alan Watt, pg. 5<br>
+				    (2)<a href="http://en.wikipedia.org/wiki/STL_(file_format)">STL (binary)specification</a><br>
+				    (3)<a href="http://en.wikipedia.org/wiki/STL_%28file_format%29#ASCII_STL">STL (ascii)specification</a><br/>
+				    (4)<a href="http://devongovett.github.com/bmp.js/">Devon Govett's bmp.js</a><br>
+				    (5)<a href="http://www.thingiverse.com/thing:9656">sample models</a><br>
+				    <br>
+				    Controls:<br>
+				    (1) Magnification (slider range: 0 - 200 in Chrome).<br>
+				    (2) Click on an arrow to rotate 10 degrees increment.<br><br>
+				    </p>
+				    <select id="combo">
+				      <option value="monkey_vtn.stl">monkey</option>
+				      <option value="torus_vtn.stl">torus</option>
+				      <option value="cylinder_vtn_200v.stl">cylinder</option>
+				      <option value="cone_vtn_100v.stl">cone</option>
+				      <option value="monkey_ascii.stl">monkey(ascii)</option>
+				      <option value="torus_ascii.stl">torus(ascii)</option>
+					</select> 
+				    <p id="xpos"> Rotate X: </p>
+				    <p id="ypos"> Rotate Y: </p>
+				    
+					Magnification: <input id="slider" type="range" value=100  min="1" max="200" step="10" /><br>
+				    <br>
+			</div>
+	    </div>
+
 
 <div id="divLeft">
 	<img id="imgLeft" class="img" src="asset/arrowLeft.png"
-    onMouseOver="src='asset/arrowLeftOver.png'"
-    onMouseOut="src='asset/arrowLeft.png'"/>
+	    onMouseOver="src='asset/arrowLeftOver.png'"
+	    onMouseOut="src='asset/arrowLeft.png'"/>
 </div>
 
 <div id="divRight">
 	<img id="imgRight" class="img" src="asset/arrowRight.png"
-    onMouseOver="src='asset/arrowRightOver.png'"
-    onMouseOut="src='asset/arrowRight.png'"/>
-</div>
-
-<div id="divControls">
-    <p> Javascript-STL loader<br>
-    <br>
-    Reference: <br>
-    (1)3D Computer Graphics - 3rd Edition by Alan Watt, pg. 5<br>
-    (2)<a href="http://en.wikipedia.org/wiki/STL_(file_format)">STL (binary)specification</a><br>
-    (3)<a href="http://en.wikipedia.org/wiki/STL_%28file_format%29#ASCII_STL">STL (ascii)specification</a><br/>
-    (4)<a href="http://devongovett.github.com/bmp.js/">Devon Govett's bmp.js</a><br>
-    (5)<a href="http://www.thingiverse.com/thing:9656">sample models</a><br>
-    <br>
-    Controls:<br>
-    (1) Magnification (slider range: 0 - 200 in Chrome).<br>
-    (2) Click on an arrow to rotate 10 degrees increment.<br><br>
-    </p>
-    <select id="combo">
-      <option value="monkey_vtn.stl">monkey</option>
-      <option value="torus_vtn.stl">torus</option>
-      <option value="cylinder_vtn_200v.stl">cylinder</option>
-      <option value="cone_vtn_100v.stl">cone</option>
-      <option value="monkey_ascii.stl">monkey(ascii)</option>
-      <option value="torus_ascii.stl">torus(ascii)</option>
-	</select> 
-    <p id="xpos"> Rotate X: </p>
-    <p id="ypos"> Rotate Y: </p>
-    
-	Magnification: <input id="slider" type="range" value=100  min="1" max="200" step="10" /><br>
-    <br>
+	    onMouseOver="src='asset/arrowRightOver.png'"
+	    onMouseOut="src='asset/arrowRight.png'"/>
 </div>
 
 </body>

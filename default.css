@@ -7,9 +7,6 @@ canvas {
 		position:relative;
 		left: 50;
 		top: 20;
-        /*background-color: #DDD;
-        border-radius: 30px;
-        opacity: 1;*/
     }
 	
 button {
@@ -17,21 +14,32 @@ button {
 }
 
 #divLeft {
+	margin-left: 160px;
+	float: left;
 	position:relative; 
 	top:20; 
 	left:190;
 }
 
 #divRight {
+	margin-left: 20px;
+	float: left;
 	position:relative; 
 	top:-15; 
 	left:280;
 }
 
+#divCanvas {
+	float: left;
+	position: relative;
+}
+
 #divControls {
+	margin-left: 10px;
 	top:-450; 
 	left:470; 
-    position:relative;
+	position:relative;
+        float: left;
 }
 
 
