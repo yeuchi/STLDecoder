@@ -1,7 +1,7 @@
 # STLDecoder
 3D format: STL file decoder for javascript \
-a. binary
-b. ascii
+- binary 
+- ascii
 
 Page: https://yeuchi.github.io/STLDecoder/index.html
 
